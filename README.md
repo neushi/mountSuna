@@ -10,8 +10,8 @@ Mac, quit auto-mounting my volumes!
 fstabを編集する際は以下のコマンドを使用します：
     sudo vifs
 
-## 3. ボリューム情報取得スクリプト
-### スクリプト全文
+## 3. ボリューム情報取得コマンド
+### コマンド全文
 diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'| sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */####/' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
 
 ### コマンドの詳細説明
