@@ -1,4 +1,4 @@
-# mountSuna
+# mountSuna　マウントすな!
 Mac, quit auto-mounting my volumes!
 
 # macが勝手にボリュームをマウントしないようにする
