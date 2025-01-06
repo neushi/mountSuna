@@ -39,7 +39,9 @@ sed '/Mounted: *Yes/s/^# */####/'
 sed '/Volume UUID:/s/^# */# /'
 ```
 
-5. fstab形式へ変換：例えば、Volume UUID: 12345678-1234-1234-1234-123456789012 を UUID=12345678-1234-1234-1234-123456789012 none auto noauto に変換します。
+5. fstab形式へ変換：
+   例えば、Volume UUID: 12345678-1234-1234-1234-123456789012 を 
+   UUID=12345678-1234-1234-1234-123456789012 none auto noauto に変換します。
 
 ```bash
 sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
