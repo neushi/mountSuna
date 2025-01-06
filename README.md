@@ -17,7 +17,7 @@ diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot U
 ```
 
 ### コマンドの詳細説明
-スクリプトを分解すると以下のようになります：
+分解すると以下のようになります：
 
 1. ボリューム情報の取得：
 ```bash
