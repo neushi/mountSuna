@@ -13,7 +13,7 @@ fstabを編集する際は以下のコマンドを使用します：
 ## 3. ボリューム情報取得コマンド
 ### コマー用コマンド
 ```bash
-diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\\*\\*\\*\\*\\*\\*'| sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */####/' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
+diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'| sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */####/' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
 ```
 
 ### コマンドの詳細説明
@@ -21,7 +21,7 @@ diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot U
 
 1. ボリューム情報の取得：
 ```bash
-diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\\*\\*\\*\\*\\*\\*'
+diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'
 ```
 
 2. 行頭に#を追加：
