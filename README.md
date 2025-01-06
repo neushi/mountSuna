@@ -12,7 +12,7 @@ fstabを編集する際は以下のコマンドを使用します：
 
 ## 3. ボリューム情報取得スクリプト
 ### スクリプト全文
-diskutil info -all|grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' | sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */### /' | sed '/Volume Name:/s/^# */#-------- /' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/#UUID=\1 none auto noauto/'
+diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' | sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */### /' | sed '/Volume Name:/s/^# */#-------- /' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/#UUID=\1 none auto noauto/'
 
 ### スクリプトの機能
 1. システム上の全ボリューム情報を取得
@@ -25,7 +25,7 @@ diskutil info -all|grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUI
 スクリプトを分解すると以下のようになります：
 
 1. ボリューム情報の取得：
-    diskutil info -all|grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:'
+    diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:'
 
 2. 行頭に#を追加：
     sed 's/^/#/'
