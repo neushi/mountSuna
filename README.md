@@ -47,3 +47,15 @@ sed '/Volume UUID:/s/^# */# /'
 sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
 ```
 
+
+### エイリアスの設定
+以下のコマンドを`.zshrc`や`.bashrc`に追加することで、簡単にボリューム情報を取得できます：
+
+```bash
+alias mountSuna="diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'| sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */####/' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'"
+```
+
+使用方法：
+```bash
+mountSuna
+```
