@@ -11,7 +11,7 @@ fstabを編集する際は以下のコマンドを使用します：
     sudo vifs
 
 ## 3. ボリューム情報取得コマンド
-### コマー用コマンド
+### コマンド
 ```bash
 diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'| sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */####/' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
 ```
