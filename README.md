@@ -10,52 +10,37 @@ Mac, quit auto-mounting my volumes!
 fstabを編集する際は以下のコマンドを使用します：
     sudo vifs
 
-## 3. ボリューム情報取得コマンド
-### コマンド
+## 3. ボリューム情報取得コマンド（Pythonスクリプト）
+
+以下の `mount_suna.py` スクリプトを使用することで、`fstab` にそのまま貼り付けられる形式でボリューム一覧を取得できます。メンテナンスしやすく、出力も見やすく整形されます。
+
+### 実行準備
+
+リポジトリ内の `mount_suna.py` に実行権限を付与します（初回のみ）：
 ```bash
-diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'| sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */####/' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
+chmod +x mount_suna.py
 ```
 
-### コマンドの詳細説明
-分解すると以下のようになります：
+### 実行例
 
-1. ボリューム情報の取得：
-```bash
-diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'
-```
-
-2. 行頭に#を追加：
-```bash
-sed 's/^/#/'
-```
-
-3. マウント済みの項目を####でマーク：
-```bash
-sed '/Mounted: *Yes/s/^# */####/'
-```
-
-4. UUID行の整形：
-```bash
-sed '/Volume UUID:/s/^# */# /'
-```
-
-5. fstab形式へ変換：例えば、
-   Volume UUID: 12345678-1234-1234-1234-123456789012 を 
-   UUID=12345678-1234-1234-1234-123456789012 none auto noauto に変換します。
+スクリプトを実行すると、以下のように設定用のテキストが出力されます。
 
 ```bash
-sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'
+./mount_suna.py
 ```
 
-
-### エイリアスの設定
-以下のコマンドを`.zshrc`や`.bashrc`に追加することで、簡単にボリューム情報を取得できます：
-
-```bash
-alias mountSuna="diskutil info -all | grep -e 'Volume UUID' -e 'Volume Name:' -e 'APFS Snapshot UUID:' -e 'Mounted:' -e '\*\*\*\*\*\*'| sed 's/^/#/' | sed '/Mounted: *Yes/s/^# */####/' | sed '/Volume UUID:/s/^# */# /' | sed 's/Volume UUID: *\(.*\)/UUID=\1 none auto noauto/'"
+**出力イメージ:**
+```text
+# **********
+# Volume Name: Macintosh HD
+#### Mounted: Yes
+# UUID=12345678-ABCD-EFGH-IJKL-1234567890AB none auto noauto
+# **********
 ```
 
-使用方法：
-```bash
-mountSuna
-```
+### 使い方
+
+1. スクリプトを実行し、自動マウントを防ぎたいボリュームを探します。
+2. 対象ボリュームの出力にある `UUID=...` から始まる行をコピーします。
+3. `sudo vifs` を用いて fstab を開き、末尾に貼り付けます。
+4. コピーした行の先頭にある `# ` を削除して保存します。
