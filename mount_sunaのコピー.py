@@ -115,7 +115,6 @@ def main():
 
     if current_block:
         process_block(current_block)
-    input("Press Enter to exit...")
 
 if __name__ == "__main__":
     main()
